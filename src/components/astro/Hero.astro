@@ -1,0 +1,72 @@
+<section class="hero">
+  <!-- 
+    The announcement bar is a pattern that earns its place 
+    here — it's how Breezy communicates global social proof 
+    (47 countries) without interrupting the headline.
+    Keep it tiny. Keep it dismissible.
+  -->
+  <div class="announcement" role="status">
+    <span>↑ Now serving 47 countries</span>
+  </div>
+
+  <div class="content">
+    <!-- 
+      Note: The "Artisanal Air" text in Breezy is rendered in 
+      accent blue. This is not a span with class="accent" — it's 
+      typographically intentional. Use inline style or a utility 
+      class that maps to --color-accent.
+    -->
+    <h1 class="headline">
+      Premium <em class="accent">Artisanal Air,</em><br />
+      Delivered Fresh
+    </h1>
+
+    <p class="sub">
+      Hand-curated atmospheric blends sourced from the world's finest altitudes.
+      Because you deserve air with character.
+    </p>
+
+    <div class="actions">
+      <!-- Primary CTA -->
+      <a href="/pricing" class="btn btn--primary">Start Breathing Better →</a>
+      <!-- Secondary — note "Watch the Story" implies video. -->
+      <!-- Implement with a lightweight modal, not an embedded player -->
+      <button class="btn btn--ghost">▶ Watch the Story</button>
+    </div>
+
+    <!-- Social proof: faces + count. Psychological trust pattern. -->
+    <div class="proof">
+      <div class="avatars" aria-hidden="true">
+        <!-- Stack 4 avatar circles -->
+      </div>
+      <p class="proof-text">
+        <strong>2,847</strong> breathers joined this month
+      </p>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero {
+    /* min-height: 80vh;
+    display: grid;
+    place-items: center;
+    background: var(--color-air);
+    padding: var(--space-16) var(--space-4);
+    text-align: center; */
+    outline: 1px solid red;
+  }
+
+  .headline {
+    /* font-size: var(--headline); */
+    /* ch units constrain line length by character count */
+    /* max-width: 12ch;
+    margin: 0 auto var(--space-md); */
+  }
+
+  /* 
+   * clamp() is the responsive typography answer.
+   * Never hard-code font sizes for different breakpoints
+   * when clamp() handles the gradient fluidly.
+   */
+</style>

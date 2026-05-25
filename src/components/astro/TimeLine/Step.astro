@@ -1,0 +1,46 @@
+---
+interface Props {
+  step: number;
+  heading?: string;
+  bodyText?: string;
+}
+const { step, heading, bodyText } = Astro.props;
+---
+
+<div class="timeline-step">
+  <span class="number">{step}</span>
+  <div class="content">
+    <h3>{heading}</h3>
+    <p>
+      {bodyText}
+    </p>
+  </div>
+</div>
+
+<style>
+  .timeline-step {
+    display: grid;
+    gap: 1rem;
+    place-items: center;
+    position: relative;
+
+    .number {
+      background: var(--step-bg);
+      border-radius: 50%;
+      color: var(--color-light);
+      display: inline-block;
+      align-items: center;
+      place-content: center;
+      height: 60px;
+      width: 60px;
+      transition: all 250ms ease-in-out;
+    }
+
+    &:hover {
+      > .number,
+      &::after {
+        background-color: var(--color-status-active);
+      }
+    }
+  }
+</style>

@@ -1,0 +1,40 @@
+.timeline {
+  --step-bg: #285f93;
+  --color-status-active: #3a9fa6;
+  display: grid;
+  gap: 5.5rem;
+  padding-block-start: 2rem;
+}
+
+.timeline-step {
+  anchor-scope: --step-anchor;
+
+  .number {
+    anchor-name: --step-anchor;
+  }
+
+  :not(:last-of-type)&::after {
+    background-color: var(--step-bg);
+    position: absolute;
+    position-anchor: --step-anchor;
+    content: "";
+    height: 40px;
+    width: 2px;
+    top: calc(anchor(bottom) + 6.5rem);
+  }
+}
+
+@media (min-width: 768px) {
+  .timeline {
+    grid: auto / repeat(auto-fit, minmax(12rem, 1fr));
+    gap: 1.5rem;
+  }
+  .timeline-step {
+    :not(:last-of-type)&::after {
+      top: calc(anchor(top) + 2rem);
+      right: calc(anchor(right) + -10rem);
+      height: 2px;
+      width: 80px;
+    }
+  }
+}

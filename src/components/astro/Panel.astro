@@ -1,0 +1,71 @@
+---
+import Container from "@components/astro/Container.astro";
+
+interface Props {
+  label?: string;
+  heading?: string;
+  sub?: string;
+  centered?: boolean;
+  accent?: boolean;
+  dark?: boolean;
+  fullWidth?: boolean;
+}
+
+const {
+  label,
+  heading,
+  sub,
+  centered = false,
+  dark = false,
+  accent = false,
+  fullWidth = false,
+} = Astro.props;
+---
+
+<section
+  class:list={["panel", { centered: centered, dark: dark, accent: accent }]}
+>
+  <div class="container">
+    {label && <p class="label">{label}</p>}
+    {heading && <h2 class="section-heading">{heading}</h2>}
+    {sub && <p>{sub}</p>}
+    <slot />
+  </div>
+</section>
+
+<style>
+  .panel {
+    padding: var(--space-lg) var(--space-md);
+    margin: 0 auto;
+
+    &.centered {
+      text-align: center;
+    }
+
+    &.dark {
+      background: var(--color-dark);
+      color: var(--color-light);
+      max-width: 100%;
+      padding: var(--space-sm) var(--space-md);
+    }
+    &.accent {
+      background: var(--color-palette-sky-50);
+    }
+    /* &.full-width {
+      width: 100vw;
+      margin-left: calc(50% - 50vw);
+    } */
+  }
+
+  .label {
+    color: var(--color-primary);
+  }
+
+  .section-heading {
+    font-size: var(--size-step-3);
+  }
+
+  .section--centered {
+    text-align: center;
+  }
+</style>

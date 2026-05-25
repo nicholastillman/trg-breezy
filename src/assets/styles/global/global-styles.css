@@ -1,0 +1,75 @@
+/* This file contains the semantic tokens for use app wide */
+:root {
+  /* ---------- Neutral */
+  --color-app-bg: var(var(--color-palette-neutral-25));
+  --color-app-bg-shade: var(--color-palette-neutral-200);
+  --color-light: var(--color-palette-neutral-50);
+  --color-dark: var(--color-palette-neutral-700);
+  --color-dark-shade: var(--color-palette-neutral-800);
+  --color-accent: var(--color-palette-slate-600);
+  /* Brand */
+  --color-primary: var(--color-palette-sky-500);
+  --color-secondary: var(--color-palette-amber-500);
+
+  /* Signal Colors */
+  --color-critical: var(--color-palette-rose-500);
+  --color-notification: var(--color-palette-violet-500);
+  --color-note: var(--color-palette-signal-message-400);
+  --color-warning: var(--color-palette-amber-400);
+  --color-affirmative: var(--color-palette-emerald-500);
+
+  /* Art Direction */
+
+  --border-color: var(--color-palette-neutral-300, #b0ada6);
+  --font-family-heading: var(--font-family-secondary);
+  --font-labels: var(--font-family-secondary);
+  --labels: var(--size-step-000);
+  --captions: var(--size-step-00);
+  --lead: var(--size-step-1);
+  --section-label: var(--size-step-2);
+  /* Composition */
+  --flow-space: var(--space-xs);
+}
+
+/* Base styles */
+body {
+  background-color: var(--color-app-bg);
+  font-family: var(--font-family-base); /* base | secondary */
+  font-size: var(--size-step-1);
+  font-weight: var(--font-weight-regular);
+  color: var(--color-dark);
+  margin: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+  font-family: var(--font-family-heading); /* base | secondary */
+  font-weight: var(--font-weight-medium);
+  line-height: var(--line-height-tight);
+  margin: 0;
+}
+
+h1 {
+  font-size: var(--size-step-6);
+}
+h2 {
+  font-size: var(--size-step-5);
+}
+h3 {
+  font-size: var(--size-step-4);
+}
+h4 {
+  font-size: var(--size-step-3);
+}
+h5 {
+  /* font-size: var(--size-step-4); */
+}
+
+ul[class] {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}

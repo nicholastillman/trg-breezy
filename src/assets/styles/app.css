@@ -1,0 +1,11 @@
+@layer reset, fonts, global, modules, compositions, utilities, design-system;
+@import "./global/reset.css" layer(reset);
+@import "./global/fonts.css" layer(fonts);
+
+@import "./root.css" layer(design-system);
+
+@import "./global/global-styles.css" layer(global);
+@import "./compositions/index.css" layer(compositions);
+
+@import "./modules/index.css" layer(modules);
+/*@import "@assets/styles/utilities" layer(utilities); */
