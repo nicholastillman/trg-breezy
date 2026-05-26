@@ -1,0 +1,39 @@
+---
+interface Props {
+  items: string[];
+}
+const { items } = Astro.props;
+const duped = [...items, ...items];
+---
+
+<div class="marquee">
+  <ul class="list marquee-track">
+    {
+      duped.map((item, index) => (
+        <li class="logo" aria-hidden={index >= items.length}>
+          {item}
+        </li>
+      ))
+    }
+  </ul>
+</div>
+
+<style>
+  .marquee {
+    max-width: 800px;
+    margin-inline: auto;
+    overflow: hidden;
+
+    .list {
+      display: flex;
+      gap: var(--gap);
+      width: max-content;
+      animation: scroll 30s linear infinite;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .list {
+      animation: none;
+    }
+  }
+</style>
