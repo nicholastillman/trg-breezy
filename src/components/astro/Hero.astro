@@ -6,10 +6,10 @@
     Keep it tiny. Keep it dismissible.
   -->
   <div class="announcement" role="status">
-    <span>↑ Now serving 47 countries</span>
+    <span class="badge">Now serving 47 countries</span>
   </div>
 
-  <div class="content">
+  <div class="content flow">
     <!-- 
       Note: The "Artisanal Air" text in Breezy is rendered in 
       accent blue. This is not a span with class="accent" — it's 
@@ -28,33 +28,55 @@
 
     <div class="actions">
       <!-- Primary CTA -->
-      <a href="/pricing" class="btn btn--primary">Start Breathing Better →</a>
+      <a href="/pricing" class="button primary">Start Breathing Better →</a>
       <!-- Secondary — note "Watch the Story" implies video. -->
       <!-- Implement with a lightweight modal, not an embedded player -->
-      <button class="btn btn--ghost">▶ Watch the Story</button>
+      <button class="button btn-ghost">▶ Watch the Story</button>
     </div>
 
     <!-- Social proof: faces + count. Psychological trust pattern. -->
     <div class="proof">
       <div class="avatars" aria-hidden="true">
         <!-- Stack 4 avatar circles -->
+        <span class="avatar" style="background:#fcd34d">🧑</span>
+        <span class="avatar" style="background:#a5f3fc">👩</span>
+        <span class="avatar" style="background:#c4b5fd">🧔</span>
+        <span class="avatar" style="background:#fda4af">👱</span>
+        <span class="avatar" style="background:#86efac">👩&zwj;🦰</span>
       </div>
       <p class="proof-text">
-        <strong>2,847</strong> breathers joined this month
+        <strong>12,847</strong> breathers joined this month
       </p>
     </div>
   </div>
 </section>
 
 <style>
+  .flow > * + * {
+    margin-block-start: 1.5rem;
+  }
   .hero {
-    /* min-height: 80vh;
+    background:
+      radial-gradient(
+        ellipse 80% 60% at 50% 0%,
+        rgba(186, 230, 253, 0.5),
+        transparent
+      ),
+      radial-gradient(
+        ellipse 60% 50% at 80% 80%,
+        rgba(139, 92, 246, 0.08),
+        transparent
+      ),
+      var(--color-palette-sky-50);
     display: grid;
-    place-items: center;
-    background: var(--color-air);
-    padding: var(--space-16) var(--space-4);
-    text-align: center; */
-    outline: 1px solid red;
+    min-height: 100vh;
+    place-content: center;
+    padding-block: 180px 24px 80px;
+    text-align: center;
+  }
+
+  .content {
+    padding-inline: var(--space-sm);
   }
 
   .headline {
@@ -63,10 +85,102 @@
     /* max-width: 12ch;
     margin: 0 auto var(--space-md); */
   }
+  .sub {
+    max-width: 42ch;
+    margin-inline: auto;
+  }
 
+  .actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: center;
+
+    .button {
+      background: var(--color-light);
+      border-radius: 50px;
+      border: 1.5px solid var(--color-palette-slate-200);
+      color: var(--color-dark);
+      color: var(--color-palette-slate-700);
+      display: grid;
+      align-content: center;
+      font-weight: var(--font-weight-bold);
+      padding: var(--size-step-00) var(--space-md);
+      text-decoration: none;
+      transition: 400ms ease-out;
+
+      &:not(.primary):hover {
+        background: var(--color-palette-sky-50);
+        border-color: var(--color-palette-slate-700);
+      }
+      &.primary {
+        background: var(--color-palette-sky-500);
+        border: none;
+        box-shadow: 0 4px 16px rgba(14, 165, 233, 0.35);
+        color: var(--color-light);
+
+        &:hover {
+          background-color: var(--color-palette-sky-700);
+          transform: translateY(-4px);
+        }
+      }
+    }
+  }
   /* 
    * clamp() is the responsive typography answer.
    * Never hard-code font sizes for different breakpoints
    * when clamp() handles the gradient fluidly.
    */
+  .announcement {
+    .badge {
+      border: 1px solid blue;
+      background: var(--color-light);
+      border: 1px solid var(--color-palette-sky-200);
+      border-radius: 100px;
+      padding-block: var(--space-xs);
+      padding-inline: var(--space-sm);
+      display: flex;
+      gap: var(--space-xs);
+      align-items: center;
+      max-width: fit-content;
+      justify-self: center;
+      &::before {
+        content: "";
+        display: inline-block;
+        width: 8px;
+        height: 8px;
+        background: var(--color-palette-emerald-400);
+        border-radius: 50%;
+      }
+    }
+  }
+
+  .proof {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .proof-text {
+      font-size: var(--size-step-00);
+      color: var(--color-palette-slate-500);
+      strong {
+        color: var(--color-palette-slate-800);
+      }
+    }
+    .avatars {
+      display: flex;
+      margin-block-start: var(--space-md);
+    }
+    .avatar {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      border: 2.5px solid #fff;
+      margin-left: -10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.85rem;
+    }
+  }
 </style>
