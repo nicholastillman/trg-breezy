@@ -1,7 +1,9 @@
 ---
 import Container from "@components/astro/Container.astro";
+import type { lowercase } from "astro:schema";
 
 interface Props {
+  id?: string;
   label?: string;
   heading?: string;
   sub?: string;
@@ -9,9 +11,11 @@ interface Props {
   accent?: boolean;
   dark?: boolean;
   fullWidth?: boolean;
+  textStyle?: "uppercase" | "capitalize" | "lowercase";
 }
 
 const {
+  id,
   label,
   heading,
   sub,
@@ -19,11 +23,22 @@ const {
   dark = false,
   accent = false,
   fullWidth = false,
+  textStyle,
 } = Astro.props;
 ---
 
 <section
-  class:list={["panel", { centered: centered, dark: dark, accent: accent }]}
+  id&&
+  id={id}
+  class:list={[
+    "panel",
+    {
+      centered: centered,
+      dark: dark,
+      accent: accent,
+    },
+    textStyle && `text-${textStyle}`,
+  ]}
 >
   <div class="container">
     {label && <p class="label">{label}</p>}
@@ -55,6 +70,18 @@ const {
       width: 100vw;
       margin-left: calc(50% - 50vw);
     } */
+    &.text-capitalize {
+      text-transform: capitalize;
+    }
+    &.text-lowercase {
+      text-transform: lowercase;
+    }
+    &.text-uppercase {
+      text-transform: uppercase;
+      font-size: var(--size-step-00);
+      font-weight: var(--font-weight-bold);
+      letter-spacing: var(--letter-spacing-micro);
+    }
   }
 
   .label {

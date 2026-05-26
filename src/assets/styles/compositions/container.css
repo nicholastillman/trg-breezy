@@ -1,7 +1,7 @@
 .container {
   margin: 0 auto;
   max-inline-size: 1100px;
-  outline: 1px dashed orangered;
+  /* outline: 1px dashed orangered; */
 }
 
 .full-bleed {

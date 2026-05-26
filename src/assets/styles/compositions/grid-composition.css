@@ -1,0 +1,10 @@
+.grid {
+  outline: 1px solid red;
+  display: grid;
+}
+
+[data-grid="auto"] {
+  grid: auto / repeat(auto-fit, minmax(6rem, 1fr));
+  gap: var(--gap);
+  overflow-x: hidden;
+}
