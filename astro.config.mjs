@@ -1,6 +1,6 @@
 // @ts-check
 import { defineConfig, fontProviders } from "astro/config";
-
+import vue from "@astrojs/vue";
 // https://astro.build/config
 export default defineConfig({
   fonts: [
@@ -15,4 +15,5 @@ export default defineConfig({
       cssVariable: "--font-family-secondary",
     },
   ],
+  integrations: [vue()],
 });

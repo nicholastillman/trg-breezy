@@ -10,8 +10,6 @@ const logos = ["Lungify", "AirBnBreeze", "OxyCorp", "NostrilTech", "GaspWorks"];
   sub="Trusted By Industry Leaders Who Breathe"
 >
   <div class="client-brands full-bleed">
-    <!-- <ul class="list grid" data-grid="auto"> -->
-    <!-- <div class="slide-track"> -->
     <Marquee items={logos} />
   </div>
 </Panel>
@@ -31,13 +29,12 @@ const logos = ["Lungify", "AirBnBreeze", "OxyCorp", "NostrilTech", "GaspWorks"];
 
     .logo {
       color: var(--color-palette-slate-700);
-      font-family: var(--font-family-heading);
-      font-weight: var(--font-weight-bold);
-      font-size: var(--size-step-2);
       flex-shrink: 0;
-      opacity: 0.35;
+      font-family: var(--font-family-heading);
+      font-size: var(--size-step-2);
+      font-weight: var(--font-weight-bold);
       letter-spacing: normal;
-      /* width: 100px; */
+      opacity: 0.35;
       text-align: center;
     }
   }

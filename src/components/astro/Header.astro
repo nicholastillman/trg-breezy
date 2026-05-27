@@ -223,6 +223,67 @@
     font-family: inherit;
   }
 
+  .more-dropdown {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background: rgba(30, 41, 59, 0.97);
+    backdrop-filter: blur(8px);
+    min-width: 200px;
+    padding: 8px 0;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-4px);
+    transition:
+      opacity 0.2s,
+      transform 0.2s,
+      visibility 0.2s;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+  }
+  .more-wrap {
+    position: relative;
+    height: 100%;
+  }
+  .more-dropdown {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background: rgba(30, 41, 59, 0.97);
+    backdrop-filter: blur(8px);
+    min-width: 200px;
+    padding: 8px 0;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-4px);
+    transition:
+      opacity 0.2s,
+      transform 0.2s,
+      visibility 0.2s;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+  }
+  .more-dropdown.open {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+  .more-dropdown a {
+    display: block;
+    padding: 12px 24px;
+    color: rgba(255, 255, 255, 0.8);
+    text-decoration: none;
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    transition:
+      background 0.15s,
+      color 0.15s;
+  }
+  .more-dropdown a:hover {
+    background: rgba(255, 255, 255, 0.08);
+    color: var(--color-light);
+  }
+
   /* ── HAMBURGER (mobile) ── */
   .hamburger {
     display: none;
@@ -241,7 +302,7 @@
     display: block;
     width: 26px;
     height: 2px;
-    background: #fff;
+    background: var(--color-light);
     border-radius: 2px;
     transition:
       transform 0.3s,
@@ -278,7 +339,7 @@
   }
   .mobile-menu a {
     display: block;
-    color: #fff;
+    color: var(--color-light);
     text-decoration: none;
     font-size: 1.05rem;
     font-weight: 600;

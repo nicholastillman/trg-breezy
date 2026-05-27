@@ -1,36 +1,36 @@
 ---
-import Footer from "@components/astro/Footer.astro";
+import Layout from "@layouts/Layout.astro";
+import Panel from "@components/astro/Panel.astro";
 import Header from "@components/astro/Header.astro";
 import Hero from "@components/astro/Hero.astro";
+import ClientLogos from "@components/astro/ClientLogos.astro";
 import FeaturesGrid from "@components/astro/FeaturesGrid.astro";
 import HowItWorks from "@components/astro/HowItWorks.astro";
-import Panel from "@components/astro/Panel.astro";
-// import AtmosphereSync from "@components/vue/AtmosphereSync.vue";
-// import Newsletter from "@components/vue/Newsletter.vue";
-import Welcome from "@components/Welcome.astro";
-import Layout from "@layouts/Layout.astro";
-import ClientLogos from "@components/astro/ClientLogos.astro";
-
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+import Newsletter from "@components/astro/Newsletter.astro";
+import Footer from "@components/astro/Footer.astro";
+// ────────────── Framework Components ──────────
+import AtmosphereSync from "@components/vue/AtmosphereSync/AtmosphereSync.vue";
 ---
 
 <Layout>
-  <!-- TODO -->
   <Header />
-
-  <!-- DONE -->
   <Hero />
   <ClientLogos />
-  <!-- TODO -->
-  <!-- <AtmosphereSync /> -->
-  <!-- DONE -->
+
   <FeaturesGrid />
-
-  <!-- DONE -->
   <HowItWorks />
-
-  <!-- TODO -->
-  <!-- <Newsletter /> -->
-  <Footer />
+  <!-- ── Atmosphere Sync — the Vue island ──────────────────────────────── -->
+  <Panel id="atmosphere-sync" fullWidth>
+    <AtmosphereSync client:idle />
+  </Panel>
+  <Newsletter />
+  <div class="entry-links"></div>
 </Layout>
+
+<Footer />
+
+<style>
+  :global(#atmosphere-sync):not(div#atmosphere-sync) {
+    border-bottom: 2px solid var(--color-palette-sky-50);
+  }
+</style>
