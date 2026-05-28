@@ -78,7 +78,6 @@ watch(selectedMood, async (mood) => {
     class="atmosphere-sync"
     aria-label="Atmosphere Sync — personalised air pairing"
   >
-    <!-- ── Section header — matches the site's editorial section pattern ── -->
     <header class="atmosphere-sync-header flow">
       <p class="label-text"><span class="super">NEW!</span>ATMOSPHERE SYNC™</p>
       <h2 class="display-text atmosphere-sync-heading">
@@ -89,12 +88,9 @@ watch(selectedMood, async (mood) => {
       </p>
     </header>
 
-    <!-- ── Mood selector — the single user input ──────────────────────────── -->
     <MoodSelector v-model="selectedMood" />
 
-    <!-- ── Animated output area ───────────────────────────────────────────── -->
     <Transition name="atmospheric-fade" mode="out-in">
-      <!-- Loading state -->
       <div
         v-if="isGenerating"
         key="loading"
@@ -106,7 +102,6 @@ watch(selectedMood, async (mood) => {
         <p class="atmospheric-loader-text">Reading local atmosphere...</p>
       </div>
 
-      <!-- Recommendation panel -->
       <AtmosphericPanel
         v-else-if="recommendation && weather && aqi"
         key="panel"
@@ -115,14 +110,15 @@ watch(selectedMood, async (mood) => {
         :aqi="aqi"
       />
 
-      <!-- Prompt state — before any mood is selected -->
       <div v-else key="prompt" class="atmosphere-sync-prompt">
         <div class="prompt-glyph" aria-hidden="true">◌</div>
-
         <p>Select a mood above to receive your atmospheric pairing.</p>
       </div>
     </Transition>
-    <button v-if="recommendation" @click="toggleHistory">Show History</button>
+
+    <button class="history-button" v-if="recommendation" @click="toggleHistory">
+      Show History
+    </button>
 
     <!-- ── Session history ─────────────────────────────────────────────────── -->
     <HistoryArchive
@@ -291,5 +287,15 @@ watch(selectedMood, async (mood) => {
 .atmospheric-fade-leave-to {
   opacity: 0;
   transform: translateY(-4px);
+}
+
+.history-button {
+  background-color: var(--color-palette-slate-700);
+  border: none;
+  color: var(--color-palette-slate-200);
+  font-weight: var(--font-weight-regular);
+  padding: var(--space-xs) var(--space-sm);
+  border-radius: var(--radius-lg);
+  margin-block-start: var(--space-md);
 }
 </style>

@@ -125,7 +125,7 @@ function capitalize(s: string): string {
 }
 
 .archive-clear:hover {
-  color: var(--color-palette-slate-600);
+  color: var(--color-palette-sky-400);
 }
 
 .archive-list {
