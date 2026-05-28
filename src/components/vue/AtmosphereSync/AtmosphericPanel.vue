@@ -3,10 +3,12 @@ import type {
   AtmosphericRecommendation,
   WeatherData,
   AQIData,
-} from "@/types/atmosphere";
-import { ref } from "vue";
+} from ".@/types/atmosphere.ts";
 
-import orderForm from "./order-form.vue";
+import { ref, computed, onMounted } from "vue";
+
+import AtmosphereOrderModal from "./AtmosphereOrderModal.vue";
+
 const isOpen = ref(false);
 
 const props = defineProps<{
@@ -30,8 +32,6 @@ const conditionGlyph = computed(
   () => CONDITION_GLYPHS[props.weather.condition] ?? "○",
 );
 
-import { computed } from "vue";
-
 // AQI bar width — capped at 100% visually, capped at 200 for scale
 const aqiBarWidth = computed(() =>
   Math.min(100, Math.round((props.aqi.index / 150) * 100)),
@@ -44,8 +44,6 @@ const aqiBarColor = computed(() => {
   if (q === "moderate") return "var(--color-aqi-moderate)";
   return "var(--color-aqi-heavy)";
 });
-// Utilize orderform
-import OrderForm from "./order-form.vue";
 </script>
 
 <template>
@@ -133,6 +131,14 @@ import OrderForm from "./order-form.vue";
     <footer class="panel-footer">
       <p class="panel-aqi-note">{{ recommendation.aqiNote }}</p>
     </footer>
+
+    <AtmosphereOrderModal
+      :is-open="isOpen"
+      :product="recommendation.product"
+      :price="recommendation.price"
+      :aqi-note="recommendation.aqiNote"
+      @close="isOpen = false"
+    />
   </article>
 </template>
 

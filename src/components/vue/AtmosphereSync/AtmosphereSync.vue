@@ -16,13 +16,6 @@ import MoodSelector from "./MoodSelector.vue";
 import AtmosphericPanel from "./AtmosphericPanel.vue";
 import HistoryArchive from "./HistoryArchive.vue";
 
-// ── State ─────────────────────────────────────────────────────────────────────
-const selectedMood = ref<MoodId | null>(null);
-const showHistory = ref(true);
-const toggleHistory = () => {
-  showHistory.value = !showHistory.value;
-};
-
 // ── Composables ───────────────────────────────────────────────────────────────
 const { weather, fetchWeather } = useWeather();
 const { aqi, fetchAQI } = useAQI();
@@ -30,6 +23,22 @@ const { recentSessions, saveSession, getRecentSessions, clearHistory } =
   useAtmosphereDB();
 
 const { recommendation, isGenerating, generate } = useAtmosphereEngine();
+
+// ── State ─────────────────────────────────────────────────────────────────────
+const selectedMood = ref<MoodId | null>(null);
+const showHistory = ref(false);
+
+const toggleHistory = () => {
+  showHistory.value = !showHistory.value;
+};
+
+const handleClearHistory = async () => {
+  await clearHistory();
+
+  // Keep controls visible,
+  // but reset the panel state
+  showHistory.value = false;
+};
 
 // ── On mount: pre-fetch data + load archive ───────────────────────────────────
 onMounted(async () => {
@@ -116,13 +125,13 @@ watch(selectedMood, async (mood) => {
       </div>
     </Transition>
 
-    <button class="history-button" v-if="recommendation" @click="toggleHistory">
-      Show History
+    <button v-if="recommendation" class="history-button" @click="toggleHistory">
+      {{ showHistory ? "Hide History" : "Show History" }}
     </button>
 
     <!-- ── Session history ─────────────────────────────────────────────────── -->
     <HistoryArchive
-      v-if="recentSessions.length > 0"
+      v-if="showHistory"
       :sessions="recentSessions"
       @clear="clearHistory"
       :isVisible="showHistory"
