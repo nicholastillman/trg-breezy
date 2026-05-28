@@ -21,7 +21,7 @@ import AtmosphereSync from "@components/vue/AtmosphereSync/AtmosphereSync.vue";
   <HowItWorks />
   <!-- ── Atmosphere Sync — the Vue island ──────────────────────────────── -->
   <Panel id="atmosphere-sync" fullWidth>
-    <AtmosphereSync client:idle />
+    <AtmosphereSync :isVisible="showHistory" client:idle />
   </Panel>
   <Newsletter />
   <div class="entry-links"></div>
@@ -30,7 +30,7 @@ import AtmosphereSync from "@components/vue/AtmosphereSync/AtmosphereSync.vue";
 <Footer />
 
 <style>
-  :global(#atmosphere-sync):not(div#atmosphere-sync) {
+  :global(#atmosphere-sync):not(astro-island #atmosphere-sync) {
     border-bottom: 2px solid var(--color-palette-sky-50);
   }
 </style>

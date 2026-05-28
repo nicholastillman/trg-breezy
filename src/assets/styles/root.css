@@ -45,6 +45,12 @@
   --shadow-lg: 0 12px 40px rgba(0, 0, 0, 0.08);
   --shadow-xl: 0 20px 60px rgba(0, 0, 0, 0.1);
 
+  /* AQI indicator colors */
+  --color-aqi-pristine: #5dcaa5;
+  --color-aqi-clean: #4a90d9;
+  --color-aqi-moderate: #ef9f27;
+  --color-aqi-heavy: #e24b4a;
+
   /* Font Stacks */
   --font-family-mono: DM Mono, Mplus 1p, monospace;
   --font-family-system-ui:
