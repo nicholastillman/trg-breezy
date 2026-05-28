@@ -10,8 +10,7 @@ import type {
 } from "../types/atmosphere";
 
 // ─────────────────────────────────────────────────────────────────────────────
-// Descriptor tables — all copy is authored here, not generated
-// Change these to tune the brand voice without touching component logic
+// Descriptor tables — all copy is authored here, not dynamically generated (yet)
 // ─────────────────────────────────────────────────────────────────────────────
 
 interface MoodDescriptor {
@@ -54,6 +53,45 @@ const MOOD_DESCRIPTORS: Record<MoodId, MoodDescriptor> = {
   },
 };
 
+// ─────────────────────────────────────────────────────────────────────────────
+// Mood-based product modifiers
+// This is the personalization layer.
+// Weather + AQI define the "base atmosphere"
+// Mood subtly reshapes the recommendation identity.
+// ─────────────────────────────────────────────────────────────────────────────
+const MOOD_VARIANTS: Record<
+  MoodId,
+  {
+    suffix: string;
+    priceModifier: number;
+  }
+> = {
+  focused: {
+    suffix: "Focus Blend",
+    priceModifier: 6,
+  },
+
+  reflective: {
+    suffix: "Reserve Blend",
+    priceModifier: 12,
+  },
+
+  restless: {
+    suffix: "Charged Blend",
+    priceModifier: 8,
+  },
+
+  serene: {
+    suffix: "Quiet Blend",
+    priceModifier: 4,
+  },
+
+  energized: {
+    suffix: "Active Blend",
+    priceModifier: 10,
+  },
+};
+
 const TIME_DESCRIPTORS: Record<TimeOfDay, string> = {
   "early-morning": "first light",
   morning: "morning clarity",
@@ -61,6 +99,11 @@ const TIME_DESCRIPTORS: Record<TimeOfDay, string> = {
   evening: "the descending hour",
   night: "late quiet",
 };
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Product matrix
+// Weather + AQI establish the foundational recommendation
+// ─────────────────────────────────────────────────────────────────────────────
 
 // Product name matrix: [weather condition][aqi quality]
 const PRODUCT_MATRIX: Record<
@@ -264,22 +307,34 @@ export function generateRecommendation(
   ctx: AtmosphericContext,
 ): AtmosphericRecommendation {
   const mood = MOOD_DESCRIPTORS[ctx.mood];
+  const moodVariant = MOOD_VARIANTS[ctx.mood];
   const time = TIME_DESCRIPTORS[ctx.timeOfDay];
-  const product = PRODUCT_MATRIX[ctx.weather.condition]?.[ctx.aqi.quality] ?? {
+
+  const baseProduct = PRODUCT_MATRIX[ctx.weather.condition]?.[
+    ctx.aqi.quality
+  ] ?? {
     name: "The Foundation Blend",
     collection: "Daily Edition",
+    price: "$40",
   };
+
+  // Mood modifies the identity subtly
+  const product = `${baseProduct.name} — ${moodVariant.suffix}`;
+
+  // convert the productBase price
+  const basePrice = Number(baseProduct.price.replace("$", ""));
+  // Apply mood modifier
+  const adjustedPrice = `$${basePrice + moodVariant.priceModifier}`;
 
   const headline = buildHeadline(mood, ctx.weather, ctx.aqi, time);
   const aqiNote = `Local air reads ${ctx.aqi.index} AQI — ${ctx.aqi.label}. Pairs well with ${mood.tone} intention.`;
-
   const pairingNotes = buildPairingNotes(ctx, mood);
 
   return {
     headline,
-    product: product.name,
-    price: product.price,
-    collection: product.collection,
+    product: product,
+    price: adjustedPrice,
+    collection: baseProduct.collection,
     aqiNote,
     pairingNotes,
   };

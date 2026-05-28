@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { MoodId } from "../../../types/atmosphere";
+import type { MoodId } from "@/types/atmosphere";
 
 const moods: { id: MoodId; label: string }[] = [
   { id: "focused", label: "Focused" },
@@ -60,14 +60,14 @@ const selected = defineModel<MoodId | null>({ default: null });
 }
 
 .mood-option:hover {
-  border-color: var(--color-palette-amber-500);
-  color: var(--color-palette-amber-500);
+  border-color: var(--color-palette-sky-700);
+  color: var(--color-palette-sky-700);
   transform: translateY(-1px);
 }
 
 .mood-option.is-selected {
-  border-color: var(--color-palette-amber-500);
-  color: var(--color-palette-amber-500);
+  background-color: var(--color-palette-slate-700);
+  color: var(--color-light);
 }
 
 .mood-option-glyph {

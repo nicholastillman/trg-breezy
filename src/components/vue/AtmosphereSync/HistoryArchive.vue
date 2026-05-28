@@ -1,8 +1,10 @@
 <script setup lang="ts">
-import type { AtmosphericSession } from "../../../types/atmosphere";
+import type { AtmosphericSession } from "@/types/atmosphere";
+import { ref, watch, onMounted } from "vue";
 
 const props = defineProps<{
   sessions: AtmosphericSession[];
+  isVisible: boolean;
 }>();
 
 const emit = defineEmits<{
@@ -41,7 +43,11 @@ function capitalize(s: string): string {
 </script>
 
 <template>
-  <aside class="history-archive" aria-label="Your atmosphere archive">
+  <aside
+    class="history-archive"
+    aria-label="Your atmosphere archive"
+    v-show="isVisible"
+  >
     <header class="archive-header">
       <p class="archive-label">YOUR PERSONAL ATMOSPHERE ARCHIVE</p>
       <button
@@ -86,7 +92,6 @@ function capitalize(s: string): string {
 
 <style scoped>
 .history-archive {
-  border-top: 1px solid var(--color-palette-slate-100);
   margin-top: var(--space-md);
   max-width: 640px;
   margin-inline: auto;

@@ -3,7 +3,7 @@ import type {
   AtmosphericRecommendation,
   WeatherData,
   AQIData,
-} from "../../../types/atmosphere";
+} from "@/types/atmosphere";
 import { ref } from "vue";
 
 import orderForm from "./order-form.vue";
@@ -19,7 +19,7 @@ const props = defineProps<{
 const CONDITION_GLYPHS: Record<string, string> = {
   clear: "○",
   "partly-cloudy": "⛅︎",
-  overcast: "●",
+  overcast: "☁︎",
   drizzle: "∶",
   rain: "⛆",
   storm: "≋",
@@ -44,7 +44,7 @@ const aqiBarColor = computed(() => {
   if (q === "moderate") return "var(--color-aqi-moderate)";
   return "var(--color-aqi-heavy)";
 });
-
+// Utilize orderform
 import OrderForm from "./order-form.vue";
 </script>
 
@@ -130,18 +130,10 @@ import OrderForm from "./order-form.vue";
 
     <!-- ── AQI note ───────────────────────────────────────────────────── -->
 
-    <p class="panel-aqi-note">{{ recommendation.aqiNote }}</p>
+    <footer class="panel-footer">
+      <p class="panel-aqi-note">{{ recommendation.aqiNote }}</p>
+    </footer>
   </article>
-  <div class="modal flow" :class="{ 'is-open': isOpen }">
-    <div class="card">
-      <p class="product">{{ recommendation.product }}</p>
-      <img src="/breezy-concept.png" alt="" width="160" />
-
-      <h4>{{ recommendation.price }}</h4>
-    </div>
-    <small>{{ recommendation.aqiNote }}</small>
-    <OrderForm :price="recommendation.price" />
-  </div>
 </template>
 
 <style scoped>
@@ -150,13 +142,11 @@ import OrderForm from "./order-form.vue";
 }
 
 .atmospheric-panel {
-  border: 1px solid var(--color-palette-sky-200);
+  border: 1px solid var(--color-palette-slate-200);
   anchor-name: --modal-anchor;
   background: #fcfcfc;
   border-radius: var(--radius-lg);
   margin: var(--space-m) auto;
-  padding-block: var(--space-md);
-  padding-inline: var(--space-sm);
 }
 
 /* ── Headline ────────────────────────────────────────────────────── */
@@ -170,16 +160,16 @@ import OrderForm from "./order-form.vue";
   line-height: 1.45;
   letter-spacing: -0.01em;
   margin: 0;
-  padding: var(--space-sm) var(--space-sm) var(--space-md);
+  padding: var(--space-lg);
 }
 
 /* ── Product ─────────────────────────────────────────────────────── */
 .panel-product {
-  background-color: var(--color-palette-neutral-100);
-  border-radius: 5px;
-  padding: var(--space-sm) var(--space-md);
+  /* background-color: var(--color-palette-neutral-100); */
+  /* border-radius: 5px; */
+  padding: var(--space-lg);
   border: 1px solid var(--color-palette-slate-200);
-  margin-block-end: 2rem;
+  /* margin-block-end: 2rem; */
 }
 
 .inner {
@@ -212,40 +202,25 @@ import OrderForm from "./order-form.vue";
 }
 
 .panel-cta {
-  background:
-    radial-gradient(
-      ellipse 80% 60% at 50% 0%,
-      rgba(186, 230, 253, 0.5),
-      transparent
-    ),
-    radial-gradient(
-      ellipse 60% 50% at 80% 80%,
-      rgba(159, 122, 247, 0.08),
-      transparent
-    ),
-    var(--color-palette-sky-100);
+  background: var(--color-palette-slate-700);
   border: 1px solid transparent;
   border-radius: var(--radius-lg);
-  color: var(--color-palette-slate-700);
+  color: var(--color-palette-slate-100);
   flex-shrink: 0;
   font-size: var(--size-step-00);
   letter-spacing: 0.01em;
   padding: 10px 20px;
   text-decoration: none;
   text-transform: uppercase;
+  letter-spacing: var(--letter-spacing-flat);
   transition: all 200ms ease-in-out;
 }
 
 .panel-cta:hover {
   opacity: 0.8;
-  color: var(--color-palette-sky-700);
-  border-color: var(--color-palette-sky-500);
-  background: var(--color-palette-sky-200);
-  span {
-    display: inline-block;
-    transition: transform 200ms ease-in-out;
-    transform: translateX(2px);
-  }
+  border-color: var(--color-palette-slate-500);
+  background: var(--color-palette-slate-500);
+  color: var(--color-palette-slate-200);
 }
 
 /* ── Readings ────────────────────────────────────────────────────── */
@@ -259,7 +234,7 @@ import OrderForm from "./order-form.vue";
   display: grid;
   justify-content: center;
   align-items: flex-start;
-  padding: var(--space-xs) var(--space-sm);
+  padding: var(--space-sm) var(--space-sm);
   border-right: 1px solid var(--color-palette-slate-200);
 }
 
@@ -291,7 +266,7 @@ import OrderForm from "./order-form.vue";
 .aqi-bar {
   width: 100%;
   height: 2px;
-  background: var(--color-palette-sky-200);
+  background: var(--color-palette-slate-100);
   border-radius: 2px;
   margin-top: 6px;
   overflow: hidden;
@@ -305,7 +280,7 @@ import OrderForm from "./order-form.vue";
 
 /* ── Pairing notes ───────────────────────────────────────────────── */
 .panel-notes {
-  padding: var(--space-md) var(--space-md);
+  padding: var(--space-lg) var(--space-md);
   border-bottom: 1px solid var(--color-palette-sky-100);
 }
 
@@ -319,12 +294,12 @@ import OrderForm from "./order-form.vue";
 .panel-notes-list {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  /* align-items: flex-start; */
   gap: 6px;
   list-style: none;
   padding: 0;
   margin-inline: auto;
-  max-width: 48ch;
+  max-width: 32ch;
 }
 
 .panel-note {
@@ -349,6 +324,10 @@ import OrderForm from "./order-form.vue";
   color: var(--color-palette-sky-700);
   margin: 0;
   font-style: italic;
+}
+/* ── Panel Footer ────────────────────────────────────────────────────── */
+.panel-footer {
+  padding-block: var(--space-md);
 }
 
 /* ── Responsive ──────────────────────────────────────────────────── */
