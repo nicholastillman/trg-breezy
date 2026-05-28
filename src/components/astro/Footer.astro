@@ -1,0 +1,120 @@
+---
+
+---
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-grid grid" data-grid="auto">
+      <div class="footer-brand">
+        <div class="nav-brand">
+          <em>Breezy</em>&thinsp;™
+        </div>
+        <p>
+          Making the world's most abundant resource feel exclusive since 2026.
+          Venture-backed. Carbon-confused.
+        </p>
+      </div>
+      <div>
+        <h4>Product</h4>
+        <ul role="menu" class="list">
+          <li><a href="#features">Features</a></li>
+          <li><a href="#pricing">Pricing</a></li>
+          <li><a href="#">API Docs</a></li>
+          <li><a href="#">Changelog</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Company</h4>
+        <ul role="menu" class="list">
+          <li><a href="#">About (It's Air)</a></li>
+          <li><a href="#">Blog</a></li>
+          <li><a href="#">Careers</a></li>
+          <li><a href="#">Press Kit</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Legal</h4>
+        <ul>
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Terms of Service</a></li>
+          <li><a href="#">Air EULA</a></li>
+          <li><a href="#">Nostril Waiver</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">&copy; 2026 Breezy</div>
+  </div>
+</footer>
+
+<style>
+  /* ── FOOTER ── */
+  footer {
+    background: var(--color-palette-slate-900);
+    color: var(--color-light);
+    padding: 64px 24px 32px;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+  }
+  .footer-grid {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 40px;
+  }
+  .footer-brand .nav-brand {
+    font-size: 1.5rem;
+
+    em {
+      font-style: normal;
+      background: linear-gradient(
+        135deg,
+        var(--color-palette-sky-400),
+        var(--color-palette-violet-500)
+      );
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+  }
+  .footer-brand p {
+    margin-top: 10px;
+    font-size: 0.85rem;
+    line-height: 1.6;
+    max-width: 280px;
+  }
+  footer h4 {
+    color: #fff;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-bottom: 16px;
+    font-family: "DM Sans", sans-serif;
+  }
+  footer ul {
+    list-style: none;
+  }
+  footer li {
+    margin-bottom: 10px;
+  }
+  footer a {
+    color: var(--color-palette-slate-400);
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: color 0.2s;
+  }
+  footer a:hover {
+    color: var(--color-palette-sky-400);
+  }
+  .footer-bottom {
+    max-width: 1100px;
+    margin: 48px auto 0;
+    padding-top: 24px;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.8rem;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+</style>

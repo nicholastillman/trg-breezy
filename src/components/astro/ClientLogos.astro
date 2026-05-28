@@ -1,0 +1,47 @@
+---
+import Marquee from "@components/astro/Marquee.astro";
+import Panel from "@components/astro/Panel.astro";
+const logos = ["Lungify", "AirBnBreeze", "OxyCorp", "NostrilTech", "GaspWorks"];
+---
+
+<Panel
+  centered
+  textStyle="uppercase"
+  sub="Trusted By Industry Leaders Who Breathe"
+>
+  <div class="client-brands full-bleed">
+    <Marquee items={logos} />
+  </div>
+</Panel>
+
+<style>
+  :has(.client-brands) {
+    border-bottom: 1px solid var(--color-palette-slate-300);
+  }
+  p {
+    text-transform: uppercase;
+  }
+  .client-brands {
+    --gap: var(--space-xl);
+    padding-block: var(--space-lg);
+    padding-inline: var(--space-md);
+    border-bottom: 1px solid var(--color-palette-sky-100);
+
+    .logo {
+      color: var(--color-palette-slate-700);
+      flex-shrink: 0;
+      font-family: var(--font-family-heading);
+      font-size: var(--size-step-2);
+      font-weight: var(--font-weight-bold);
+      letter-spacing: normal;
+      opacity: 0.35;
+      text-align: center;
+    }
+  }
+
+  @keyframes scroll {
+    to {
+      transform: translateX(calc(-50% - var(--gap) / 2));
+    }
+  }
+</style>

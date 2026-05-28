@@ -1,0 +1,31 @@
+.super {
+  font-size: var(--size-step-000);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: var(--letter-spacing-micro);
+  vertical-align: super;
+  color: var(--color-palette-rose-500);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: var(--color-palette-violet-500);
+  display: inline-block;
+  transform: rotate(-22deg);
+  animation: tilt-shaking 0.3s linear infinite;
+  margin-block-start: 2rem;
+}
+
+@keyframes tilt-shaking {
+  0% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(5deg);
+  }
+  50% {
+    transform: rotate(0eg);
+  }
+  75% {
+    transform: rotate(-5deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}

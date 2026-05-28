@@ -1,1 +1,571 @@
-<pre>[ header here ]</pre>
+<div class="header-wrap">
+  <div class="utility-bar">
+    <a href="#"><span class="util-icon">📱</span> Breezy App</a>
+    <a href="#"><span class="util-icon">📅</span> Consultations</a>
+    <a href="#"><span class="util-icon">📞</span> 1-888-AIR-GOOD</a>
+  </div>
+  <div class="mid-bar">
+    <div class="nav-brand"><em>Breezy</em>&thinsp;™</div>
+    <div class="mid-links">
+      <a href="#">Locations <span style="font-size:0.6rem;">▾</span></a>
+      <a href="#">Rewards Club</a>
+      <a href="#signup" class="book-btn"
+        >Book Air <span style="font-size:0.6rem;">▾</span></a
+      >
+    </div>
+    <button
+      class="hamburger"
+      id="hamburgerBtn"
+      aria-expanded="false"
+      aria-controls="mobileMenu"
+      aria-label="Toggle navigation menu"
+    >
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </div>
+  <nav class="main-nav">
+    <div class="location-badge">
+      <div class="location-dot">📍</div>
+      SUMMIT
+    </div>
+    <div class="main-nav-links">
+      <a href="#features">Features</a>
+      <a href="#how">How It Works</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#testimonials">Reviews</a>
+      <a href="#">Promotions</a>
+    </div>
+    <div class="more-wrap">
+      <button
+        class="more-btn"
+        id="moreBtn"
+        aria-expanded="false"
+        aria-controls="moreDropdown"
+      >
+        More
+        <span class="more-arrow">▼</span>
+        <div class="more-dropdown" id="moreDropdown">
+          <a href="#faq">FAQ</a>
+          <a href="#">Air Menu</a>
+          <a href="#">Careers</a>
+          <a href="#">Directions</a>
+        </div>
+      </button>
+    </div>
+  </nav>
+</div>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#features">Features</a>
+  <a href="#how">How It Works</a>
+  <a href="#pricing">Pricing</a>
+  <a href="#testimonials">Reviews</a>
+  <a href="#">Promotions</a>
+  <div class="mobile-divider"></div>
+  <a href="#faq">FAQ</a>
+  <a href="#">Air Menu</a>
+  <a href="#">Careers</a>
+  <a href="#">Directions</a>
+  <div class="mobile-divider"></div>
+  <a href="#">Locations</a>
+  <a href="#">Rewards Club</a>
+  <a href="#signup">Book Air</a>
+</div>
+<style>
+  .header-wrap {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+  }
+
+  /* Utility bar */
+  .utility-bar {
+    background: var(--color-palette-slate-900);
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 0 32px;
+    height: 36px;
+    gap: 24px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  }
+  .utility-bar a {
+    color: rgba(255, 255, 255, 0.7);
+    text-decoration: none;
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: color 0.2s;
+  }
+  .utility-bar a:hover {
+    color: #fff;
+  }
+  .utility-bar .util-icon {
+    font-size: 0.85rem;
+  }
+
+  /* Middle bar: logo + secondary nav */
+  .mid-bar {
+    background: var(--color-palette-slate-800);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 32px;
+    height: 56px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  }
+  .nav-brand {
+    font-family: var(--font-family-headings);
+    font-weight: 900;
+    font-size: 1.5rem;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .nav-brand em {
+    font-style: normal;
+    background: linear-gradient(
+      135deg,
+      var(--color-palette-sky-400),
+      var(--color-palette-violet-500)
+    );
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .mid-links {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+  }
+  .mid-links a {
+    color: rgba(255, 255, 255, 0.75);
+    text-decoration: none;
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    transition: color 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .mid-links a:hover {
+    color: #fff;
+  }
+  .mid-links .book-btn {
+    background: var(--color-palette-sky-500);
+    color: #fff;
+    padding: 8px 20px;
+    border-radius: 4px;
+    transition: background 0.2s;
+  }
+  .mid-links .book-btn:hover {
+    background: var(--color-palette-sky-600);
+  }
+
+  /* Main nav bar */
+  .main-nav {
+    background: var(--color-palette-slate-700);
+    display: flex;
+    align-items: center;
+    padding: 0 32px;
+    height: 48px;
+    gap: 0;
+  }
+
+  .main-nav-links {
+    display: flex;
+  }
+
+  .main-nav-links a {
+    color: rgba(255, 255, 255, 0.85);
+    text-decoration: none;
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 1.8px;
+    text-transform: uppercase;
+    padding: 0 20px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    border-right: 1px solid rgba(255, 255, 255, 0.12);
+    transition:
+      background 0.2s,
+      color 0.2s;
+    white-space: nowrap;
+  }
+
+  element.style {
+  }
+  .more-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: rgba(255, 255, 255, 0.85);
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 1.8px;
+    text-transform: uppercase;
+    padding: 0 20px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border-right: 1px solid rgba(255, 255, 255, 0.12);
+    transition: background 0.2s;
+    font-family: inherit;
+  }
+
+  .more-dropdown {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background: rgba(30, 41, 59, 0.97);
+    backdrop-filter: blur(8px);
+    min-width: 200px;
+    padding: 8px 0;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-4px);
+    transition:
+      opacity 0.2s,
+      transform 0.2s,
+      visibility 0.2s;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+  }
+  .more-wrap {
+    position: relative;
+    height: 100%;
+  }
+  .more-dropdown {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background: rgba(30, 41, 59, 0.97);
+    backdrop-filter: blur(8px);
+    min-width: 200px;
+    padding: 8px 0;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-4px);
+    transition:
+      opacity 0.2s,
+      transform 0.2s,
+      visibility 0.2s;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+  }
+  .more-dropdown.open {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+  .more-dropdown a {
+    display: block;
+    padding: 12px 24px;
+    color: rgba(255, 255, 255, 0.8);
+    text-decoration: none;
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    transition:
+      background 0.15s,
+      color 0.15s;
+  }
+  .more-dropdown a:hover {
+    background: rgba(255, 255, 255, 0.08);
+    color: var(--color-light);
+  }
+
+  /* ── HAMBURGER (mobile) ── */
+  .hamburger {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    width: 44px;
+    height: 44px;
+    position: relative;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+  }
+  .hamburger span {
+    display: block;
+    width: 26px;
+    height: 2px;
+    background: var(--color-light);
+    border-radius: 2px;
+    transition:
+      transform 0.3s,
+      opacity 0.2s;
+  }
+  .hamburger.open span:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+  }
+  .hamburger.open span:nth-child(2) {
+    opacity: 0;
+  }
+  .hamburger.open span:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+  }
+
+  /* ── MOBILE MENU OVERLAY ── */
+  .mobile-menu {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: var(--color-palette-slate-900);
+    z-index: 99;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 120px;
+    gap: 0;
+    overflow-y: auto;
+  }
+  .mobile-menu.open {
+    display: flex;
+  }
+  .mobile-menu a {
+    display: block;
+    color: var(--color-light);
+    text-decoration: none;
+    font-size: 1.05rem;
+    font-weight: 600;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    padding: 18px 32px;
+    text-align: center;
+    width: 100%;
+    max-width: 400px;
+    transition: background 0.15s;
+  }
+  .mobile-menu a:hover {
+    background: rgba(255, 255, 255, 0.05);
+  }
+  .mobile-menu .mobile-divider {
+    width: 80%;
+    max-width: 300px;
+    height: 1px;
+    background: rgba(255, 255, 255, 0.1);
+    margin: 8px auto;
+  }
+
+  /* ── RESPONSIVE NAV ── */
+  @media (max-width: 1024px) {
+    .main-nav-links,
+    .more-wrap {
+      display: none;
+    }
+    .mid-links {
+      display: none;
+    }
+    .utility-bar {
+      display: none;
+    }
+    .hamburger {
+      display: flex;
+    }
+    .mid-bar {
+      height: 60px;
+    }
+    .main-nav {
+      height: 44px;
+    }
+    .location-badge {
+      margin-right: 0;
+    }
+  }
+
+  .location-badge {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-right: 24px;
+    color: #fff;
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+</style>
+
+<script>
+  <
+    script /*
+    Header interaction controller
+
+    Goals:
+    - avoid global functions
+    - improve accessibility
+    - centralize state handling
+    - preserve progressive enhancement
+  */
+  >document.addEventListener("DOMContentLoaded", () => {
+    /*
+      ---------------------------------------
+      ELEMENT REFERENCES
+      ---------------------------------------
+    */
+
+    const hamburgerBtn = document.getElementById("hamburgerBtn");
+    const mobileMenu = document.getElementById("mobileMenu");
+
+    const moreBtn = document.getElementById("moreBtn");
+    const moreDropdown = document.getElementById("moreDropdown");
+
+    /*
+      ---------------------------------------
+      MOBILE MENU
+      ---------------------------------------
+    */
+
+    function openMobileMenu() {
+      hamburgerBtn?.classList.add("open");
+      mobileMenu?.classList.add("open");
+
+      hamburgerBtn?.setAttribute("aria-expanded", "true");
+
+      document.documentElement.style.overflow = "hidden";
+    }
+
+    function closeMobileMenu() {
+      hamburgerBtn?.classList.remove("open");
+      mobileMenu?.classList.remove("open");
+
+      hamburgerBtn?.setAttribute("aria-expanded", "false");
+
+      document.documentElement.style.overflow = "";
+    }
+
+    function toggleMobileMenu() {
+      const isOpen = mobileMenu?.classList.contains("open");
+
+      if (isOpen) {
+        closeMobileMenu();
+      } else {
+        openMobileMenu();
+      }
+    }
+
+    hamburgerBtn?.addEventListener("click", toggleMobileMenu);
+
+    /*
+      Close mobile menu when clicking links
+    */
+
+    mobileMenu?.querySelectorAll("a").forEach((link) => {
+      link.addEventListener("click", () => {
+        closeMobileMenu();
+      });
+    });
+
+    /*
+      ---------------------------------------
+      MORE DROPDOWN
+      ---------------------------------------
+    */
+
+    function closeMoreDropdown() {
+      moreBtn?.classList.remove("open");
+      moreDropdown?.classList.remove("open");
+
+      moreBtn?.setAttribute("aria-expanded", "false");
+    }
+
+    function toggleMoreDropdown() {
+      const isOpen = moreDropdown?.classList.contains("open");
+
+      moreBtn?.classList.toggle("open");
+      moreDropdown?.classList.toggle("open");
+
+      moreBtn?.setAttribute("aria-expanded", String(!isOpen));
+    }
+
+    moreBtn?.addEventListener("click", (event) => {
+      event.stopPropagation();
+
+      toggleMoreDropdown();
+    });
+
+    /*
+      Close dropdown when clicking outside
+    */
+
+    document.addEventListener("click", (event) => {
+      if (!event.target.closest(".more-wrap")) {
+        closeMoreDropdown();
+      }
+    });
+
+    /*
+      ---------------------------------------
+      ESCAPE KEY SUPPORT
+      ---------------------------------------
+    */
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape") {
+        closeMobileMenu();
+        closeMoreDropdown();
+      }
+    });
+
+    /*
+      ---------------------------------------
+      SMOOTH SCROLL
+      ---------------------------------------
+
+      Only intercept same-page hash links.
+      Avoid hijacking external navigation.
+    */
+
+    document.querySelectorAll('a[href^="#"]').forEach((link) => {
+      link.addEventListener("click", (event) => {
+        const selector = link.getAttribute("href");
+
+        /*
+          Ignore empty hashes
+        */
+
+        if (!selector || selector === "#") {
+          return;
+        }
+
+        const target = document.querySelector(selector);
+
+        /*
+          Allow default behavior if target
+          does not exist.
+        */
+
+        if (!target) {
+          return;
+        }
+
+        event.preventDefault();
+
+        const prefersReducedMotion = window.matchMedia(
+          "(prefers-reduced-motion: reduce)",
+        ).matches;
+
+        target.scrollIntoView({
+          behavior: prefersReducedMotion ? "auto" : "smooth",
+          block: "start",
+        });
+      });
+    });
+  });
+</script>
