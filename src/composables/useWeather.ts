@@ -1,6 +1,6 @@
 import { ref } from "vue";
 import type { WeatherData } from "../types/atmosphere";
-import { getMockWeather } from "@lib/atmosphere-engine";
+import { getMockWeather } from "../lib/atmosphere-engine";
 
 // When real keys are available:
 // 1. Add OPENWEATHER_API_KEY to .env

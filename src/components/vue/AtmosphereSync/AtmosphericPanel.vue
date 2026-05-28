@@ -4,6 +4,10 @@ import type {
   WeatherData,
   AQIData,
 } from "../../../types/atmosphere";
+import { ref } from "vue";
+
+import orderForm from "./order-form.vue";
+const isOpen = ref(false);
 
 const props = defineProps<{
   recommendation: AtmosphericRecommendation;
@@ -40,11 +44,13 @@ const aqiBarColor = computed(() => {
   if (q === "moderate") return "var(--color-aqi-moderate)";
   return "var(--color-aqi-heavy)";
 });
+
+import OrderForm from "./order-form.vue";
 </script>
 
 <template>
   <article
-    class="atmospheric-panel flow"
+    class="atmospheric-panel"
     aria-label="Your atmospheric recommendation"
   >
     <!-- ── Headline ──────────────────────────────────────────────────── -->
@@ -62,7 +68,10 @@ const aqiBarColor = computed(() => {
             {{ recommendation.collection }}
           </p>
         </div>
-        <a href="/pricing" class="panel-cta"> <span>Order → </span></a>
+        <!-- <a href="/pricing" class="panel-cta"> <span>Order → </span></a> -->
+        <button class="panel-cta" @click="isOpen = true">
+          <span>Order → </span>
+        </button>
       </div>
     </div>
 
@@ -123,17 +132,29 @@ const aqiBarColor = computed(() => {
 
     <p class="panel-aqi-note">{{ recommendation.aqiNote }}</p>
   </article>
+  <div class="modal flow" :class="{ 'is-open': isOpen }">
+    <div class="card">
+      <p class="product">{{ recommendation.product }}</p>
+      <img src="/breezy-concept.png" alt="" width="160" />
+
+      <h4>{{ recommendation.price }}</h4>
+    </div>
+    <small>{{ recommendation.aqiNote }}</small>
+    <OrderForm :price="recommendation.price" />
+  </div>
 </template>
 
 <style scoped>
+.flow > * + * {
+  margin-block-start: var(--space-md);
+}
+
 .atmospheric-panel {
   border: 1px solid var(--color-palette-sky-200);
-  /* background: var(--color-palette-sky-50); */
+  anchor-name: --modal-anchor;
   background: #fcfcfc;
   border-radius: var(--radius-lg);
   margin: var(--space-m) auto;
-  /* max-width: 640px; */
-  /* overflow: hidden; */
   padding-block: var(--space-md);
   padding-inline: var(--space-sm);
 }
@@ -150,14 +171,12 @@ const aqiBarColor = computed(() => {
   letter-spacing: -0.01em;
   margin: 0;
   padding: var(--space-sm) var(--space-sm) var(--space-md);
-  /* outline: 1px dashed red; */
 }
 
 /* ── Product ─────────────────────────────────────────────────────── */
 .panel-product {
   background-color: var(--color-palette-neutral-100);
   border-radius: 5px;
-  /* border: 1px solid red; */
   padding: var(--space-sm) var(--space-md);
   border: 1px solid var(--color-palette-slate-200);
   margin-block-end: 2rem;
@@ -171,7 +190,6 @@ const aqiBarColor = computed(() => {
 }
 
 .product-label {
-  /* background: aquamarine; */
   font-size: var(--size-step-000);
   letter-spacing: 0.1em;
   color: var(--color-palette-slate-500);
@@ -241,7 +259,6 @@ const aqiBarColor = computed(() => {
   display: grid;
   justify-content: center;
   align-items: flex-start;
-  /* gap: 10px; */
   padding: var(--space-xs) var(--space-sm);
   border-right: 1px solid var(--color-palette-slate-200);
 }

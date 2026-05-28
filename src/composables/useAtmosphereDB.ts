@@ -6,7 +6,7 @@ import {
   saveSession as dbSave,
   getRecentSessions as dbGetRecent,
   clearSessions as dbClear,
-} from "@lib/db";
+} from "../lib/db";
 
 export function useAtmosphereDB() {
   const recentSessions = ref<AtmosphericSession[]>([]);

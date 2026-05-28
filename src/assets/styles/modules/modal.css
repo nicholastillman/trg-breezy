@@ -1,0 +1,34 @@
+.modal {
+  position: absolute;
+  position-anchor: --modal-anchor;
+  left: calc(anchor(right) + 1rem);
+  top: anchor(top);
+  border: 1px solid var(--color-palette-sky-200);
+  border-radius: 5px;
+  width: 320px;
+  padding: 1rem;
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    opacity 300ms var(--ease-atmospheric),
+    visibility 300ms var(--ease-atmospheric);
+
+  .card {
+    display: grid;
+    grid: auto / 1fr 1fr auto;
+    gap: 1rem;
+    margin-block-end: 2rem;
+    text-align: left;
+
+    .product {
+      font-weight: 500;
+      color: var(--color-palette-sky-500);
+      font-size: var(--size-step-0);
+      line-height: var(--line-height-flat);
+    }
+  }
+}
+.modal.is-open {
+  opacity: 1;
+  visibility: visible;
+}

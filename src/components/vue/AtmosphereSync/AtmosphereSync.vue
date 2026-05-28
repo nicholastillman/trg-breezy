@@ -5,12 +5,15 @@ import type {
   AtmosphericRecommendation,
   WeatherData,
   AQIData,
-} from "src/types/atmosphere.ts";
+} from "../../../types/atmosphere.ts";
 
-import { generateRecommendation, getTimeOfDay } from "@lib/atmosphere-engine";
-import { useWeather } from "@composables/useWeather";
-import { useAQI } from "@composables/useAQI";
-import { useAtmosphereDB } from "@composables/useAtmosphereDB";
+import {
+  generateRecommendation,
+  getTimeOfDay,
+} from "../../../lib/atmosphere-engine";
+import { useWeather } from "../../../composables/useWeather";
+import { useAQI } from "../../../composables/useAQI";
+import { useAtmosphereDB } from "../../../composables/useAtmosphereDB";
 import MoodSelector from "./MoodSelector.vue";
 import AtmosphericPanel from "./AtmosphericPanel.vue";
 import HistoryArchive from "./HistoryArchive.vue";
@@ -128,6 +131,8 @@ watch(selectedMood, async (mood) => {
 
 <style scoped>
 .atmosphere-sync {
+  position: relative;
+  anchor-scope: --modal-anchor;
   margin: 0 auto;
   max-width: 800px;
   padding: var(--space-m) var(--space-sm);

@@ -65,49 +65,117 @@ const TIME_DESCRIPTORS: Record<TimeOfDay, string> = {
 // Product name matrix: [weather condition][aqi quality]
 const PRODUCT_MATRIX: Record<
   WeatherCondition,
-  Record<AQIQuality, { name: string; collection: string }>
+  Record<AQIQuality, { name: string; collection: string; price: string }>
 > = {
   clear: {
-    pristine: { name: "Summit Reserve", collection: "Single Origin Alpine" },
-    clean: { name: "Highland Clarity", collection: "Morning Edition" },
-    moderate: { name: "Urban Refuge", collection: "Filtered Collection" },
-    heavy: { name: "The Sanctuary Blend", collection: "Maximum Filtration" },
+    pristine: {
+      name: "Summit Reserve",
+      collection: "Single Origin Alpine",
+      price: "$99",
+    },
+    clean: {
+      name: "Highland Clarity",
+      collection: "Morning Edition",
+      price: "$99",
+    },
+    moderate: {
+      name: "Urban Refuge",
+      collection: "Filtered Collection",
+      price: "$99",
+    },
+    heavy: {
+      name: "The Sanctuary Blend",
+      collection: "Maximum Filtration",
+      price: "$99",
+    },
   },
   "partly-cloudy": {
-    pristine: { name: "Veiled Summit", collection: "Diffused Light Series" },
-    clean: { name: "Soft Canopy", collection: "Dappled Edition" },
-    moderate: { name: "The Filter", collection: "Urban Clarity" },
-    heavy: { name: "Grey Refuge", collection: "Deep Filtration" },
+    pristine: {
+      name: "Veiled Summit",
+      collection: "Diffused Light Series",
+      price: "$99",
+    },
+    clean: { name: "Soft Canopy", collection: "Dappled Edition", price: "$99" },
+    moderate: { name: "The Filter", collection: "Urban Clarity", price: "$99" },
+    heavy: { name: "Grey Refuge", collection: "Deep Filtration", price: "$99" },
   },
   overcast: {
-    pristine: { name: "Pewter Reserve", collection: "Nordic Edition" },
-    clean: { name: "Muted Highland", collection: "Grey Sky Series" },
-    moderate: { name: "The Veil", collection: "Overcast Collection" },
-    heavy: { name: "City Grey", collection: "Urban Shield" },
+    pristine: {
+      name: "Pewter Reserve",
+      collection: "Nordic Edition",
+      price: "$",
+    },
+    clean: {
+      name: "Muted Highland",
+      collection: "Grey Sky Series",
+      price: "$",
+    },
+    moderate: {
+      name: "The Veil",
+      collection: "Overcast Collection",
+      price: "$",
+    },
+    heavy: { name: "City Grey", collection: "Urban Shield", price: "$" },
   },
   drizzle: {
-    pristine: { name: "Petrichor Series", collection: "Mountain Rain Accord" },
-    clean: { name: "Soft Rain", collection: "Pacific Collection" },
-    moderate: { name: "The Canopy Blend", collection: "Sheltered Edition" },
-    heavy: { name: "Grey City", collection: "Melancholic Accord" },
+    pristine: {
+      name: "Petrichor Series",
+      collection: "Mountain Rain Accord",
+      price: "$",
+    },
+    clean: { name: "Soft Rain", collection: "Pacific Collection", price: "$" },
+    moderate: {
+      name: "The Canopy Blend",
+      collection: "Sheltered Edition",
+      price: "$",
+    },
+    heavy: { name: "Grey City", collection: "Melancholic Accord", price: "$" },
   },
   rain: {
-    pristine: { name: "Deep Rain Reserve", collection: "Storm-Washed Alpine" },
-    clean: { name: "Rainfall Edition", collection: "Clean Descent" },
-    moderate: { name: "The Shelter", collection: "Rainy Urban" },
-    heavy: { name: "Industrial Rain", collection: "Filtered Downpour" },
+    pristine: {
+      name: "Deep Rain Reserve",
+      collection: "Storm-Washed Alpine",
+      price: "$",
+    },
+    clean: {
+      name: "Rainfall Edition",
+      collection: "Clean Descent",
+      price: "$",
+    },
+    moderate: { name: "The Shelter", collection: "Rainy Urban", price: "$" },
+    heavy: {
+      name: "Industrial Rain",
+      collection: "Filtered Downpour",
+      price: "$",
+    },
   },
   storm: {
-    pristine: { name: "Tempest Reserve", collection: "Wild Alpine" },
-    clean: { name: "Electric Storm", collection: "Charged Edition" },
-    moderate: { name: "Storm Refuge", collection: "Heavy Weather" },
-    heavy: { name: "The Bunker Blend", collection: "Maximum Shelter" },
+    pristine: {
+      name: "Tempest Reserve",
+      collection: "Wild Alpine",
+      price: "$",
+    },
+    clean: {
+      name: "Electric Storm",
+      collection: "Charged Edition",
+      price: "$",
+    },
+    moderate: { name: "Storm Refuge", collection: "Heavy Weather", price: "$" },
+    heavy: {
+      name: "The Bunker Blend",
+      collection: "Maximum Shelter",
+      price: "$",
+    },
   },
   snow: {
-    pristine: { name: "Glacial Reserve", collection: "First Snow Series" },
-    clean: { name: "Winter Clarity", collection: "Silent Edition" },
-    moderate: { name: "Soft Snow", collection: "Muffled Urban" },
-    heavy: { name: "The Cocoon", collection: "Enclosed Warmth" },
+    pristine: {
+      name: "Glacial Reserve",
+      collection: "First Snow Series",
+      price: "$",
+    },
+    clean: { name: "Winter Clarity", collection: "Silent Edition", price: "$" },
+    moderate: { name: "Soft Snow", collection: "Muffled Urban", price: "$" },
+    heavy: { name: "The Cocoon", collection: "Enclosed Warmth", price: "$" },
   },
 };
 
@@ -190,6 +258,7 @@ export function generateRecommendation(
   return {
     headline,
     product: product.name,
+    price: product.price,
     collection: product.collection,
     aqiNote,
     pairingNotes,
