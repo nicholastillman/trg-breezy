@@ -5,29 +5,31 @@ import type {
   AtmosphericRecommendation,
   WeatherData,
   AQIData,
-} from "../../../types/atmosphere.ts";
+} from "@/types/atmosphere.ts";
 
-import {
-  generateRecommendation,
-  getTimeOfDay,
-} from "../../../lib/atmosphere-engine";
-import { useWeather } from "../../../composables/useWeather";
-import { useAQI } from "../../../composables/useAQI";
-import { useAtmosphereDB } from "../../../composables/useAtmosphereDB";
+import { useWeather } from "@composables/useWeather";
+import { useAQI } from "@composables/useAQI";
+import { useAtmosphereDB } from "@composables/useAtmosphereDB";
+import { useAtmosphereEngine } from "@composables/useAtmosphereEngine";
+
 import MoodSelector from "./MoodSelector.vue";
 import AtmosphericPanel from "./AtmosphericPanel.vue";
 import HistoryArchive from "./HistoryArchive.vue";
 
 // ── State ─────────────────────────────────────────────────────────────────────
 const selectedMood = ref<MoodId | null>(null);
-const isGenerating = ref(false);
-const recommendation = ref<AtmosphericRecommendation | null>(null);
+const showHistory = ref(true);
+const toggleHistory = () => {
+  showHistory.value = !showHistory.value;
+};
 
 // ── Composables ───────────────────────────────────────────────────────────────
 const { weather, fetchWeather } = useWeather();
 const { aqi, fetchAQI } = useAQI();
 const { recentSessions, saveSession, getRecentSessions, clearHistory } =
   useAtmosphereDB();
+
+const { recommendation, isGenerating, generate } = useAtmosphereEngine();
 
 // ── On mount: pre-fetch data + load archive ───────────────────────────────────
 onMounted(async () => {
@@ -49,12 +51,13 @@ watch(selectedMood, async (mood) => {
   // Small pause for UX.
   await new Promise((res) => setTimeout(res, 800));
 
-  const result = generateRecommendation({
+  const result = await generate({
     mood,
     weather: weather.value!,
     aqi: aqi.value!,
-    timeOfDay: getTimeOfDay(),
   });
+
+  if (!result) return;
 
   recommendation.value = result;
   isGenerating.value = false;
@@ -70,12 +73,11 @@ watch(selectedMood, async (mood) => {
 </script>
 
 <template>
-  <div id="atmosphere-sync" style="padding-block-start: 3rem"></div>
   <section
+    id="atmosphere-sync"
     class="atmosphere-sync"
     aria-label="Atmosphere Sync — personalised air pairing"
   >
-    <!-- ── Section header — matches the site's editorial section pattern ── -->
     <header class="atmosphere-sync-header flow">
       <p class="label-text"><span class="super">NEW!</span>ATMOSPHERE SYNC™</p>
       <h2 class="display-text atmosphere-sync-heading">
@@ -86,12 +88,9 @@ watch(selectedMood, async (mood) => {
       </p>
     </header>
 
-    <!-- ── Mood selector — the single user input ──────────────────────────── -->
     <MoodSelector v-model="selectedMood" />
 
-    <!-- ── Animated output area ───────────────────────────────────────────── -->
     <Transition name="atmospheric-fade" mode="out-in">
-      <!-- Loading state -->
       <div
         v-if="isGenerating"
         key="loading"
@@ -103,7 +102,6 @@ watch(selectedMood, async (mood) => {
         <p class="atmospheric-loader-text">Reading local atmosphere...</p>
       </div>
 
-      <!-- Recommendation panel -->
       <AtmosphericPanel
         v-else-if="recommendation && weather && aqi"
         key="panel"
@@ -112,19 +110,22 @@ watch(selectedMood, async (mood) => {
         :aqi="aqi"
       />
 
-      <!-- Prompt state — before any mood is selected -->
       <div v-else key="prompt" class="atmosphere-sync-prompt">
         <div class="prompt-glyph" aria-hidden="true">◌</div>
-
         <p>Select a mood above to receive your atmospheric pairing.</p>
       </div>
     </Transition>
+
+    <button class="history-button" v-if="recommendation" @click="toggleHistory">
+      Show History
+    </button>
 
     <!-- ── Session history ─────────────────────────────────────────────────── -->
     <HistoryArchive
       v-if="recentSessions.length > 0"
       :sessions="recentSessions"
       @clear="clearHistory"
+      :isVisible="showHistory"
     />
   </section>
 </template>
@@ -141,7 +142,6 @@ watch(selectedMood, async (mood) => {
 
 /* ── Header ──────────────────────────────────────────────────────── */
 .atmosphere-sync-header {
-  margin-bottom: var(--space-2);
   .label-text {
     background: linear-gradient(
       135deg,
@@ -151,13 +151,16 @@ watch(selectedMood, async (mood) => {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     color: var(--color-palette-sky-100);
+    font-size: var(--size-step-00);
     font-weight: var(--font-weight-medium);
+    margin-bottom: var(--space-sm);
+    letter-spacing: var(--letter-spacing-micro);
   }
 }
 
 .atmosphere-sync-heading {
-  font-size: var(--size-step-0);
-  font-family: var(--font-family-base);
+  font-size: var(--size-step-3);
+  /* font-family: var(--font-family-base); */
   font-weight: var(--font-weight-medium);
   margin-block-end: var(--space-sm);
 }
@@ -284,5 +287,15 @@ watch(selectedMood, async (mood) => {
 .atmospheric-fade-leave-to {
   opacity: 0;
   transform: translateY(-4px);
+}
+
+.history-button {
+  background-color: var(--color-palette-slate-700);
+  border: none;
+  color: var(--color-palette-slate-200);
+  font-weight: var(--font-weight-regular);
+  padding: var(--space-xs) var(--space-sm);
+  border-radius: var(--radius-lg);
+  margin-block-start: var(--space-md);
 }
 </style>
